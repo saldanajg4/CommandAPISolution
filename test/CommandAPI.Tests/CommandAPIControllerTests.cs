@@ -107,7 +107,8 @@ namespace CommandAPI.Tests
             //act
             var actual = controller.GetCommandById(0);
             //Assert
-            Assert.IsType<NotFoundResult>(actual.Result);
+            // Assert.IsType<NotFoundResult>(actual.Result);
+            Assert.IsType<OkResult>(actual.Result);
         }
         [Fact]
         public void getCommandReturnCorrectType(){
