@@ -35,13 +35,12 @@ namespace CommandAPI
             builder.Password = Configuration["Password"];
 
             services.AddDbContext<CommandAPIContext>(opt => opt.UseSqlServer
-                // (Configuration.GetConnectionString("CommanderConnection"))
                 (builder.ConnectionString)
             );
 
              services.AddControllers();
             // services.AddScoped<ICommandAPIRepo, MockCommandRepo>();
-            services.AddScoped<ICommandAPIRepo,DbCommandAPIRepo>();
+            // services.AddScoped<ICommandAPIRepo,DbCommandAPIRepo>();
 
         }
 

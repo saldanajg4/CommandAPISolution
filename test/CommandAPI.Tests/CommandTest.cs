@@ -1,9 +1,10 @@
+using System;
 using CommandAPI.Models;
 using Xunit;
 
 namespace CommandAPI.Tests
 {
-    public class CommandTest
+    public class CommandTest : IDisposable
     {
         private Command commandTest;
         public CommandTest()
@@ -32,6 +33,15 @@ namespace CommandAPI.Tests
             commandTest.Line = "[Fact]";
             //assert
             Assert.Equal("[Fact]",commandTest.Line);
+        }
+
+        public void Dispose()
+        {
+            if(commandTest != null){
+                Console.WriteLine("disposing commandTest object");
+                commandTest = null;
+            }
+                
         }
     }
 }
