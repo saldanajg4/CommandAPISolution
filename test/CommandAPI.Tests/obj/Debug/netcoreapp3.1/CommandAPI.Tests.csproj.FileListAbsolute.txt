@@ -136,3 +136,7 @@ D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\n
 D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.InMemory.dll
+D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.Design.dll
+D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Npgsql.dll
+D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.Design.dll

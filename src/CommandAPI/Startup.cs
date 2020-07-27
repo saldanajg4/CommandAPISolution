@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Npgsql;
 
 namespace CommandAPI
 {
@@ -29,12 +30,12 @@ namespace CommandAPI
         public void ConfigureServices(IServiceCollection services)
         {
            
-             var builder = new SqlConnectionStringBuilder();
+             var builder = new NpgsqlConnectionStringBuilder();
             builder.ConnectionString =Configuration.GetConnectionString("CommanderConnection");
-            builder.UserID= Configuration["UserID"];
+            builder.Username= Configuration["UserID"];
             builder.Password = Configuration["Password"];
 
-            services.AddDbContext<CommandAPIContext>(opt => opt.UseSqlServer
+            services.AddDbContext<CommandAPIContext>(opt => opt.UseNpgsql
                 (builder.ConnectionString)
             );
 
