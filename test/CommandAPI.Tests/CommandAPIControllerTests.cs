@@ -103,7 +103,7 @@ namespace CommandAPI.Tests
         }
         [Fact]
         public void getCommandReturn404NotFound(){
-            //arrange
+            //arrange nothing to arrange so it can be 404
             //act
             var actual = controller.GetCommandById(0);
             //Assert
