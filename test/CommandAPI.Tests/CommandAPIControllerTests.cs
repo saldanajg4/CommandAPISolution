@@ -173,6 +173,42 @@ namespace CommandAPI.Tests
             //Assert
             Assert.IsType<CreatedAtActionResult>(actual.Result);
         }
+        [Fact]
+        public void PutCommandItem_AttributeUpdated_WhenValidObject(){
+            //Arrange
+            var cmd = new Command{
+                HowTo = "Do Something",
+                Platform = "Some platform",
+                Line = "Some Command"
+            };
+            dbContext.Commands.Add(cmd);
+            dbContext.SaveChanges();
+            var cmdId = cmd.Id;
+            cmd.HowTo = "Updating Something";
+            //Act
+            controller.PutCommandItem(cmdId, cmd);
+            var result = dbContext.Commands.Find(cmdId);
+            //Assert
+            Assert.Equal(cmd.HowTo, result.HowTo);
+        }
+        [Fact]
+        public void PutCommandItem_204ReturnCode_WhenValidObject(){
+            //Arrange
+            var cmd = new Command{
+                HowTo = "Some item",
+                Platform = "some platform",
+                Line = "some line"
+            };
+            dbContext.Commands.Add(cmd);
+            dbContext.SaveChanges();
+            var cmdId = cmd.Id;
+            cmd.HowTo = "updating some item";
+            //Act
+            var result = controller.PutCommandItem(cmdId, cmd);
+            //Assert
+            Assert.IsType<NoContentResult>(result.Result);
+        }
+
         public void Dispose()
         {
             foreach(var cmd in dbContext.Commands){

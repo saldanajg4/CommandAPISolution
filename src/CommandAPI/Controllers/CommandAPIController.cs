@@ -4,6 +4,7 @@ using CommandAPI.Data;
 using CommandAPI.Models;
 using CommandAPI.Repos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CommandAPI.Controllers
 {
@@ -68,6 +69,18 @@ namespace CommandAPI.Controllers
                 return BadRequest();
             }
             return CreatedAtAction("GetCommandById", new Command{Id=command.Id}, command);
+        }
+
+        //PUT:      api/commands/{Id}
+        [HttpPut("{id}")]
+        public ActionResult<Command> PutCommandItem(int id, Command command){
+            if(id != command.Id){
+                return BadRequest();
+            }
+            _context.Entry(command).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return NoContent();
         }
     }
 }
