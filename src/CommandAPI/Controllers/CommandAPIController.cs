@@ -74,13 +74,24 @@ namespace CommandAPI.Controllers
         //PUT:      api/commands/{Id}
         [HttpPut("{id}")]
         public ActionResult<Command> PutCommandItem(int id, Command command){
-            if(id != command.Id){
+            if(command == null || id != command.Id){
                 return BadRequest();
             }
             _context.Entry(command).State = EntityState.Modified;
             _context.SaveChanges();
 
             return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public ActionResult<Command> DeleteCommandItem(int id){
+            var commandToDelete = _context.Commands.Find(id);
+            if(commandToDelete == null){
+                return NotFound();
+            }
+            _context.Commands.Remove(commandToDelete);
+            _context.SaveChanges();
+
+            return commandToDelete;
         }
     }
 }

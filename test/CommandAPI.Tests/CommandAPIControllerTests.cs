@@ -225,6 +225,102 @@ namespace CommandAPI.Tests
             //assert
             Assert.IsType<BadRequestResult>(result.Result);
         }
+        [Fact]
+        public void PutCommandItem_AttributeUnchanged_WhenOtherObjectInvalid(){
+            //arrange
+            var cmd = new Command{
+                HowTo = "some item",
+                Platform = "some platform",
+                Line = "some line"
+            };
+            dbContext.Commands.Add(cmd);
+            dbContext.SaveChanges();
+            var cmd2 = new Command{
+                Id = cmd.Id,
+                HowTo = "updating some item",
+                Platform = "updating some platform",
+                Line = "updating some Line"
+            };
+            //Act
+            controller.PutCommandItem(cmd.Id+1,cmd2);
+            var result = dbContext.Commands.Find(cmd.Id);
+            //Assert
+            Assert.Equal(cmd.HowTo, result.HowTo);
+        }
+        [Fact]
+        public void PutCommandItem_BadRequest_WhenNullObject(){
+            //arrange 
+            var cmd = new Command{
+                HowTo = "some item",
+                Platform = "some platform",
+                Line = "some line"
+            };
+            dbContext.Commands.Add(cmd);
+            dbContext.SaveChanges();
+            var cmdId = cmd.Id;
+            //act
+            var result = controller.PutCommandItem(cmdId,null);
+            //assert
+            Assert.IsType<BadRequestResult>(result.Result);
+        }
+        [Fact]
+        public void DeleteCommandItem_DecrementItems_WhenValidObject(){
+            //arrange
+            var cmd = new Command{
+                HowTo = "some item",
+                Platform = "some platform",
+                Line = "some line"
+            };
+            dbContext.Commands.Add(cmd);
+            dbContext.SaveChanges();
+            var cmdId = cmd.Id;
+            var countBefore = dbContext.Commands.CountAsync();
+            //act
+            controller.DeleteCommandItem(cmdId);
+            //assert
+            Assert.Equal(countBefore.Result-1, dbContext.Commands.CountAsync().Result);
+        }
+        [Fact]
+        public void DeleteCommandItem_200Return_WhenValidObject(){
+             //arrange
+            var cmd = new Command{
+                HowTo = "some item",
+                Platform = "some platform",
+                Line = "some line"
+            };
+            dbContext.Commands.Add(cmd);
+            dbContext.SaveChanges();
+            var cmdId = cmd.Id;
+            //act
+            var result = controller.DeleteCommandItem(cmdId);
+            //assert here result is the command deleted
+            Assert.Null(result.Result);
+        }
+        [Fact]
+        public void DeleteCommandItem_404Return_WhenInvalidObject(){
+            //arrange
+            //act
+            var result = controller.DeleteCommandItem(-1);
+            //Assert
+            Assert.IsType<NotFoundResult>(result.Result);
+        }
+        [Fact]
+        public void DeleteCommandItem_CountNotDecremented_WhenInvalidID(){
+            //arrange
+            var cmd = new Command{
+                HowTo = "some item",
+                Platform = "some platform",
+                Line = "some line"
+            };
+            dbContext.Commands.Add(cmd);
+            dbContext.SaveChanges();
+            var cmdId = cmd.Id;
+            var count = dbContext.Commands.CountAsync();
+            //act
+            controller.DeleteCommandItem(cmdId +1);
+            //assert
+            Assert.Equal(count.Result,dbContext.Commands.CountAsync().Result);
+        }
 
         public void Dispose()
         {
