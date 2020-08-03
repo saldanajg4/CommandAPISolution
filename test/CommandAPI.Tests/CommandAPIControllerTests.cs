@@ -208,6 +208,23 @@ namespace CommandAPI.Tests
             //Assert
             Assert.IsType<NoContentResult>(result.Result);
         }
+        [Fact]
+        public void PutCommandItem_BadRequest_WhenInvalidObject(){
+            //arrange
+            var cmd = new Command{
+                HowTo = "some item",
+                Platform = "some platform",
+                Line = "some line"
+            };
+            dbContext.Commands.Add(cmd);
+            dbContext.SaveChanges();
+            var cmdId = cmd.Id;
+            cmd.HowTo = "updating some item";
+            //act
+            var result = controller.PutCommandItem(cmdId+1, cmd);
+            //assert
+            Assert.IsType<BadRequestResult>(result.Result);
+        }
 
         public void Dispose()
         {
