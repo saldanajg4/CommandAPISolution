@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CommandAPI.Data;
 using CommandAPI.Models;
 using CommandAPI.Repos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,25 +32,16 @@ namespace CommandAPI.Controllers
         }
         //api/commands
         [HttpGet]
-        public ActionResult<IEnumerable<Command>> GetAllCommands()
-        {
-            // var commandItems = _repo.GetAppCommands();
-            var commandItems = _context.Commands;
-            // return Ok(commandItems);
-            return commandItems;
-
+        public async Task<IEnumerable<Command>> GetAllCommands()
+        {   
+                return await _context.Commands.ToListAsync();
         }
 
+        [Authorize]
         //uri is GET api/commands/{id} api/commands/1
         [HttpGet("{id}")]
         public ActionResult<Command> GetCommandById(int id)
         {
-            // var commandItem = _repo.GetCommandById(id);
-            // return Ok(commandItem);
-
-            // return _context.Commands
-            //     .Where(cmd => cmd.Id == id)
-            //     .FirstOrDefault();
             var command = _context.Commands.Find(id);
             if(command == null){
                 return NotFound();
@@ -55,15 +49,12 @@ namespace CommandAPI.Controllers
             return command;
         }
         [HttpPost]
-        // public ActionResult<Command> PostCommand(Command command)
-         public ActionResult<Command> PostCommand(Command command)
+        //  public ActionResult<Command> PostCommand(Command command)
+        public ActionResult<Command> PostCommand(Command command)
         {
-            // var cmd = _repo.PostCommand(command);
-            // // return Ok(CreatedAtAction(nameof(GetCommandById), new {id = command.Id}, command));
-            // return Ok(cmd + " row inserted.");
             _context.Commands.Add(command);
             try{
-                _context.SaveChanges();
+                 _context.SaveChangesAsync();
             }
             catch{
                 return BadRequest();

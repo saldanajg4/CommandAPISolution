@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CommandAPI.Controllers;
 using CommandAPI.Data;
 using CommandAPI.Models;
@@ -22,15 +23,22 @@ namespace CommandAPI.Tests
             //create an instance of controller passing the dbContext created
             controller = new CommandAPIController(dbContext);
         }
+
+        // public async Task<IEnumerable<Command>> GetAllCommands()
+        // {   
+        //         return await _context.Commands.ToListAsync();
+        // }
+
+
         [Fact]
         public void getCommandsSize_ShoulbeZero_IfEmpty()
         {
             // arrange
 
             //act
-            var actual = controller.GetAllCommands();
+            Task<IEnumerable<Command>> actual = controller.GetAllCommands();
             //assert
-            Assert.Empty(actual.Value);
+            Assert.Empty(actual.Result);
 
         }
         [Fact]
@@ -47,9 +55,10 @@ namespace CommandAPI.Tests
             dbContext.Commands.Add(cmd);
             dbContext.SaveChanges();
             //act
-            var actual = controller.GetAllCommands();
+            Task<IEnumerable<Command>> actual = controller.GetAllCommands();
+            // var actual = controller.GetAllCommands();
             //assert
-            Assert.Single(actual.Value);
+            Assert.Single(actual.Result);
         }
         [Fact]
         public void GetNCommands_ReturnNCommandsWhenDbHasNObjs(){
@@ -70,9 +79,10 @@ namespace CommandAPI.Tests
             dbContext.Commands.Add(cmd2);
             dbContext.SaveChanges();
             //act
-            var actual = controller.GetAllCommands();
+            // var actual = controller.GetAllCommands();
+            Task<IEnumerable<Command>> actual = controller.GetAllCommands();
             int size = 0;
-            foreach(var c in actual.Value){
+            foreach(var c in actual.Result){
                 size++;
             }
 
@@ -172,6 +182,7 @@ namespace CommandAPI.Tests
             var actual = controller.PostCommand(cmd);
             //Assert
             Assert.IsType<CreatedAtActionResult>(actual.Result);
+            //  Assert.IsType<Task<IEnumerable<Command>>>(actual.Result);
         }
         [Fact]
         public void PutCommandItem_AttributeUpdated_WhenValidObject(){

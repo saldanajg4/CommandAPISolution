@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CommandAPI.Data;
 using CommandAPI.Repos;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -38,6 +39,12 @@ namespace CommandAPI
             services.AddDbContext<CommandAPIContext>(opt => opt.UseNpgsql
                 (builder.ConnectionString)
             );
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.Audience = Configuration["ResourceId"];
+                    opt.Authority = $"{Configuration["Instance"]}{Configuration["TenantId"]}";
+                });
 
              services.AddControllers();
             // services.AddScoped<ICommandAPIRepo, MockCommandRepo>();
@@ -56,6 +63,9 @@ namespace CommandAPI
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

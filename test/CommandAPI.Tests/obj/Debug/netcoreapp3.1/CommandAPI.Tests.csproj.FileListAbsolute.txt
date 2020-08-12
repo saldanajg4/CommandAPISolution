@@ -140,3 +140,10 @@ D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\n
 D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Npgsql.dll
 D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.Design.dll
+D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\users\gabriel\vsprojects\CommandAPISolution\test\CommandAPI.Tests\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

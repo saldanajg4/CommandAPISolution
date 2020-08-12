@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CommandAPI.Data{
     public class CommandAPIContext : DbContext{
-public CommandAPIContext(DbContextOptions<CommandAPIContext> options) : 
+
+
+        public CommandAPIContext(DbContextOptions<CommandAPIContext> options) : 
             base(options){
 
             }
