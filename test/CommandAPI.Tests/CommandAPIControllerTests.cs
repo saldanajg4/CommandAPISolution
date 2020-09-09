@@ -97,8 +97,10 @@ namespace CommandAPI.Tests
             var actual = controller.GetAllCommands();
 
             //Assert
-            Assert.IsType<ActionResult<IEnumerable<Command>>>(actual);
+            // Assert.IsType<ActionResult<IEnumerable<Command>>>(actual);
+            Assert.IsType<Task<IEnumerable<Command>>>(actual);
         }
+
         /****
         * I need to test getCommandById() for Null, 404 in invalid cases
         * Correct return type, Correct resource returned for valid cases   
