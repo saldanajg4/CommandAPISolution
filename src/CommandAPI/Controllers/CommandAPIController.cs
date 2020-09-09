@@ -16,7 +16,6 @@ namespace CommandAPI.Controllers
     [ApiController]
     public class CommandAPIController : ControllerBase
     {
-        private readonly ICommandAPIRepo _repo;
         //dependency injection from the dbContext class into 
         //our command api controller
         private readonly CommandAPIContext _context;
